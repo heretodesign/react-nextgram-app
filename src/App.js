@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import Flickr from './Flickr-1.4s-200px.svg';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import { Route, Link } from "react-router-dom";
+import HomePage from './pages/HomePage';
+import UserProfilePage from './pages/UserProfilePage';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    users: [],
+    isLoading: true,
+  }
+
+  componentDidMount() {
+    axios.get('https://insta.nextacademy.com/api/v1/users')
+    .then(result => {
+      this.setState({
+        users: result.data,
+        isLoading: false
+      })
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+        {
+            this.state.isLoading
+            ? <div class="has-text-white has-text-centered"><img src={Flickr} alt="Flickr" /></div>
+            : <>
+                <Route exact path="/" render={props => <HomePage {...props} users={this.state.users} />} />
+                <Route path="/users/:id" component={props => {return(<UserProfilePage {...props} users={this.state.users} />)}} />
+              </>
+          }
+        <Footer />
+      </div>
+    )
+  }
 }
 
 export default App;

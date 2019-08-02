@@ -1,0 +1,25 @@
+.btmFooter {
+  padding: 30px 0px;
+  letter-spacing: 2px;
+  color: #28353c;
+}
+
+
+.flexgrid {
+  flex-direction: row;
+  flex-wrap: wrap; 
+  justify-content: flex-start;
+  align-items: flex-start;
+  }
+
+
+.flex-container {
+  flex-direction: row;
+  flex-wrap: wrap; 
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flex-item {
+  align-items: flex-start;
+}

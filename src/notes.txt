@@ -1,0 +1,4 @@
+<Route exact path="/" component={TodoListHome} /> //homepage
+<Route path="/todos/new" component={TodoCreate} />
+<Route path="/todos/show" component={TodoShow} /> //userprofile
+
